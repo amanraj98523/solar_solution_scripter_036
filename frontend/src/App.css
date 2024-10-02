@@ -1,4 +1,5 @@
 
+
 /* contact */
 
 .contact-container {
@@ -198,4 +199,10 @@
 
 .language-selection i {
   margin-right: 8px;
+
+#root {
+  max-width: 1280px;
+  margin: auto;
+  width: 100%;
+
 }
