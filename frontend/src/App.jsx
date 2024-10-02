@@ -1,3 +1,7 @@
+
+
+import Contact from './components/Contact'
+import Footer from './components/Footer'
 import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Navbar } from "./components/Navbar";
@@ -11,8 +15,11 @@ function App() {
         <Navbar />
         <Box>
           <HomePage />
+    <Contact/>
+    <Footer/>
         </Box>
       </ChakraProvider>
+
     </>
   );
 }
