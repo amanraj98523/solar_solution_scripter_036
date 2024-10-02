@@ -1,4 +1,12 @@
 
+import "./App.css";
+import Features from "./components/Features";
+import Review from "./components/Review";
+
+
+function App() {
+  
+
 
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -10,6 +18,13 @@ import { Box } from "@chakra-ui/react";
 
 function App() {
   return (
+
+    <div className="App"> 
+      <Features/>
+      <Review/>
+    </div>
+  )
+
     <>
       <ChakraProvider>
         <Navbar />
@@ -22,6 +37,7 @@ function App() {
 
     </>
   );
+
 }
 
 export default App;
