@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import "./Features.css";
 
-const Features = () => {
+export const Features = () => {
   const [selectedImage, setSelectedImage] = useState(
     "https://global.discourse-cdn.com/business7/uploads/adalo/original/3X/0/0/00cb4da7aa01fc9b9885eb31a1562e1c9de778a4.jpeg"
   );
@@ -20,7 +20,7 @@ const Features = () => {
   };
   return (
     <Box>
-      <Heading textAlign="center" fontFamily="Arial" >
+      <Heading textAlign="center" fontFamily="Arial">
         Features and Games
       </Heading>
       <Box className="feature-container">
@@ -143,4 +143,4 @@ const Features = () => {
   );
 };
 
-export default Features;
+

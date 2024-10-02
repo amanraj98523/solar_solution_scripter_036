@@ -11,7 +11,7 @@ import {
   CardBody,
 } from "@chakra-ui/react";
 import "./Review.css"
-const Review = () => {
+export const Review = () => {
   return (
     <Box className="review-section">
       <Card maxW="md">
@@ -122,8 +122,9 @@ const Review = () => {
           }}
         ></CardFooter>
       </Card>
+      
     </Box>
   );
 };
 
-export default Review;
+// export default Review;

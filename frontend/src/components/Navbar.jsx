@@ -70,6 +70,18 @@ export const Navbar = () => {
           </HStack>
           <Button
             as="a"
+            href="Dashboard.jsx"
+            target="_blank"
+            color="black"
+            bg="#f3e3ff"
+            _hover={{
+              color: "#3E3E3E",
+            }}
+          >
+            Dashboard
+          </Button>
+          <Button
+            as="a"
             href="/EverusJeishaLainus-FullStackWebDeveloper.pdf" // Replace with your resume PDF path
             target="_blank"
             color="black"

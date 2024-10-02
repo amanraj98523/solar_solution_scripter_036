@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaSquareYoutube } from "react-icons/fa6";
@@ -6,7 +6,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { TbWorld } from "react-icons/tb";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className="footer-container">
       <div className="footer-content">
@@ -104,4 +104,4 @@ const Footer = () => {
   );
 }
 
-export default Footer;
+
