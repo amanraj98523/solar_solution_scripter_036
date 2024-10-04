@@ -1,10 +1,11 @@
-import React from 'react'
+import Sidebar from "../components/sidebar";
 
-export const Dasboard = () => {
+function Dashboard() {
   return (
     <div>
-      <h1>Hello world</h1>
+      <Sidebar />
     </div>
-  )
+  );
 }
 
+export default Dashboard;
