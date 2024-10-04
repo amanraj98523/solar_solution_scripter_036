@@ -15,12 +15,61 @@ import {
   Text,
   useColorModeValue,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import axios from "axios";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const toast = useToast();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = "done";
+      /*
+      const response = await axios.post("/register", {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      */
+      console.log(response);
+
+      toast({
+        title: "Registration successful!",
+        description: "You can now log in.",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 1000);
+    } catch (err) {
+      toast({
+        title: "Registration failed.",
+        description: "Please try again.",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+      console.error(err);
+    }
+  };
 
   return (
     <Flex
@@ -47,24 +96,33 @@ export const SignUpPage = () => {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input
+                    onChange={(e) => setFirstName(e.target.value)}
+                    type="text"
+                  />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                  <Input
+                    onChange={(e) => setLastName(e.target.value)}
+                    type="text"
+                  />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input onChange={(e) => setEmail(e.target.value)} type="email" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
+                <Input
+                  onChange={(e) => setPassword(e.target.value)}
+                  type={showPassword ? "text" : "password"}
+                />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
@@ -82,6 +140,7 @@ export const SignUpPage = () => {
                 loadingText="Submitting"
                 size="lg"
                 bg={"#8853bf"}
+                onClick={handleSubmit}
                 color={"white"}
                 _hover={{
                   bg: "#f3e3ff",
