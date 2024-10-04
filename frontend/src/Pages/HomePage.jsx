@@ -5,13 +5,13 @@ import { Review } from "../components/Review";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 
-const HomePage = () => {
+export const HomePage = () => {
   return (
     <Box>
       <GetStarted />
       <Features />
       <Review />
-      <Contact/>
+      <Contact />
       <Footer />
     </Box>
   );
