@@ -23,7 +23,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [firstName, setFirstName] = useState("");
+  const [name, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,15 +32,15 @@ export const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = "done";
-      /*
-      const response = await axios.post("/register", {
-        firstName,
+      //const response = "done";
+      ///*
+      const response = await axios.post("/auth/signup", {
+        name,
         lastName,
         email,
         password,
       });
-      */
+      //*/
       console.log(response);
 
       toast({

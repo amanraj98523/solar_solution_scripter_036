@@ -21,20 +21,22 @@ import axios from "axios";
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const toast = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      /*
       const response = {
         data: {
           accessToken: "dsfs",
           refreshToken: "Dfs",
         },
       };
-      /*
-      const response = await axios.post("/login", { email, password });
       */
+      const response = await axios.post("/auth/login", { email, password });
+
       console.log("API response:", response);
 
       if (

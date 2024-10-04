@@ -10,7 +10,6 @@ import {
   MenuList,
   MenuItem,
   useDisclosure,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
@@ -43,7 +42,7 @@ const Navlink = ({ children, onClick }) => (
   </Box>
 );
 
-export const Navbar = () => {
+export const Navbar = ({ isAuthenticated, onLogout }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
@@ -67,7 +66,6 @@ export const Navbar = () => {
         >
           <img src="pa1.png" alt="logo" width={150} height={30} />
         </Box>{" "}
-        {/* Accent color for the logo */}
         <HStack spacing={8} alignItems={"center"}>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
             {Links.map((link) => (
@@ -76,41 +74,47 @@ export const Navbar = () => {
               </Navlink>
             ))}
           </HStack>
-          <Button
-            as="a"
-            href="Dashboard.jsx"
-            color="black"
-            bg="#f3e3ff"
-            _hover={{
-              color: "#3E3E3E",
-            }}
-          >
-            Dashboard
-          </Button>
-          <Button
-            as={NavLink}
-            to={"login"}
-            //href="/login"
-            color="black"
-            bg="#f3e3ff"
-            _hover={{
-              color: "#3E3E3E",
-            }}
-          >
-            Login
-          </Button>
-          <Button
-            as={NavLink}
-            to={"signup"}
-            //href="/signup"
-            color="#0a0a0a"
-            bg="#8853bf"
-            _hover={{
-              color: "#3E3E3E",
-            }}
-          >
-            Sign Up
-          </Button>
+
+          {isAuthenticated ? (
+            // Show Logout button when the user is authenticated
+            <Button
+              onClick={onLogout}
+              color="#0a0a0a"
+              bg="#8853bf"
+              _hover={{
+                color: "#3E3E3E",
+              }}
+            >
+              Logout
+            </Button>
+          ) : (
+            // Show Login and Sign Up buttons when the user is not authenticated
+            <>
+              <Button
+                as={NavLink}
+                to={"login"}
+                color="black"
+                bg="#f3e3ff"
+                _hover={{
+                  color: "#3E3E3E",
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                as={NavLink}
+                to={"signup"}
+                color="#0a0a0a"
+                bg="#8853bf"
+                _hover={{
+                  color: "#3E3E3E",
+                }}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
+
           <Menu isOpen={isOpen}>
             <MenuButton
               as={Button}
