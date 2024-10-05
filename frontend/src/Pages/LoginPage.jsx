@@ -66,7 +66,11 @@ export const LoginPage = () => {
         });
 
         setTimeout(() => {
-          window.location.href = "/dashboard";
+          if (email == "admin@g.com") {
+            window.location.href = "/admin";
+          } else {
+            window.location.href = "/dashboard";
+          }
         }, 1000);
       } else {
         throw new Error("Invalid response format");

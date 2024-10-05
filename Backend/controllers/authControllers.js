@@ -37,6 +37,7 @@ const signup = async (req, res) => {
 
       const data1 = new userModel({
         name,
+        lastName,
         email,
         password: hashedPassword,
       });
@@ -145,12 +146,13 @@ const getCustomerById = async (req, res) => {
 };
 
 const updateCustomer = async (req, res) => {
-  console.log("Updating customer with ID:", req.params.id); // Log req.params.id to see if it's undefined
+  console.log("Updating customer with ID:", req.params.id);
   try {
     const customer = await userModel.findById(req.params.id);
 
     if (customer) {
       customer.name = req.body.name || customer.name;
+      customer.lastName = req.body.lastName || customer.lastName;
       customer.email = req.body.email || customer.email;
       customer.role = req.body.role || customer.role;
 
@@ -158,10 +160,11 @@ const updateCustomer = async (req, res) => {
         customer.password = req.body.password;
       }
 
-      const updatedCustomer = await userModel.save();
+      const updatedCustomer = await customer.save();
       res.json({
         _id: updatedCustomer._id,
         name: updatedCustomer.name,
+        lastName: updatedCustomer.lastName,
         email: updatedCustomer.email,
         role: updatedCustomer.role,
       });
@@ -169,7 +172,7 @@ const updateCustomer = async (req, res) => {
       res.status(404).json({ message: "Customer not found" });
     }
   } catch (error) {
-    console.error("Error updating customer:", error); // Log error for more details
+    console.error("Error updating customer:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };

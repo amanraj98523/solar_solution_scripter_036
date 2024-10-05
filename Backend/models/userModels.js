@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const email = "admin@g.com";
+function getRole(email) {
+  return email.toLowerCase() === "admin@g.com" ? "admin" : "user";
+}
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -24,7 +28,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "user",
+    default: getRole(email),
     enum: ["client", "admin", "user"],
   },
 });
