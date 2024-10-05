@@ -14,6 +14,8 @@ const userModel = require("../models/userModels");
 authRouter.post("/signup", signup);
 authRouter.post("/login", login);
 authRouter.post("/logout", logout);
+authRouter.patch("/update/:id", updateCustomer);
+authRouter.delete("/delete/:id", deleteCustomer);
 
 authRouter.get("/", async (req, res) => {
   try {
