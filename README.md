@@ -1,4 +1,4 @@
-# solor_solution_scripter_036
+# solar_solution_scripter_036
 
 # Masai_poll
 
