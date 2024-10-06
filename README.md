@@ -1,9 +1,9 @@
 # solor_solution_scripter_036
-Masai_poll
-# Pollify
+
+# Masai_poll
 
 ## Introduction
-Pollify is a dynamic polling platform that allows users to create polls using templates like MCQ, True or False, and Ranging. Users can attend and share polls, while poll creators can view results through various graphs, including bar, radar, and pie charts. The platform features user authentication and an admin panel for managing polls and users, making it a comprehensive solution for interactive polling and data analysis.
+Masai_poll is a dynamic polling platform that allows users to create polls using templates like MCQ, True or False, and Ranging. Users can attend and share polls, while poll creators can view results through various graphs, including bar, radar, and pie charts. The platform features user authentication and an admin panel for managing polls and users, making it a comprehensive solution for interactive polling and data analysis.
 
 ## Project Type
 Fullstack
