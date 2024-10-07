@@ -15,34 +15,36 @@ Backend: https://pollingarena.netlify.app/ <br/>
 
 ## Directory Structure
 
-solor_solution_scripter_036/
-┣ Backend/
-┃ ┣ configs/
-┃ ┣ controllers/
-┃ ┣ middlewares/
-┃ ┣ models/
-┃ ┣ node_modules/
-┃ ┣ routes/
-┃ ┣ utils/
-┃ ┣ .env
-┃ ┣ .gitignore
-┃ ┣ package-lock.json
-┃ ┣ package.json
-┃ ┗ server.js
-┣ frontend/
-┃ ┣ dist/
-┃ ┣ node_modules/
-┃ ┣ public/
-┃ ┣ src/
-┃ ┣ styles/
-┃ ┣ .gitignore
-┃ ┣ README.md
-┃ ┣ eslint.config.js
-┃ ┣ index.html
-┃ ┣ package-lock.json
-┃ ┣ package.json
-┃ ┗ vite.config.js
-┗ README.md
+\dirtree{%
+. 1 solor_solution_scripter_036/ .
+. 2 Backend/ .
+. 3 configs/ .
+. 3 controllers/ .
+. 3 middlewares/ .
+. 3 models/ .
+. 3 node_modules/ .
+. 3 routes/ .
+. 3 utils/ .
+. 3 .env .
+. 3 .gitignore .
+. 3 package-lock.json .
+. 3 package.json .
+. 3 server.js .
+. 2 frontend/ .
+. 3 dist/ .
+. 3 node_modules/ .
+. 3 public/ .
+. 3 src/ .
+. 3 styles/ .
+. 3 .gitignore .
+. 3 README.md .
+. 3 eslint.config.js .
+. 3 index.html .
+. 3 package-lock.json .
+. 3 package.json .
+. 3 vite.config.js .
+. 2 README.md .
+}
 
 ## Video Walkthrough of the project
 
