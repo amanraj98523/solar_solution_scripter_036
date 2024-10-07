@@ -15,36 +15,35 @@ Backend: https://pollingarena.netlify.app/ <br/>
 
 ## Directory Structure
 
-\dirtree{%
-. 1 solor_solution_scripter_036/ .
-. 2 Backend/ .
-. 3 configs/ .
-. 3 controllers/ .
-. 3 middlewares/ .
-. 3 models/ .
-. 3 node_modules/ .
-. 3 routes/ .
-. 3 utils/ .
-. 3 .env .
-. 3 .gitignore .
-. 3 package-lock.json .
-. 3 package.json .
-. 3 server.js .
-. 2 frontend/ .
-. 3 dist/ .
-. 3 node_modules/ .
-. 3 public/ .
-. 3 src/ .
-. 3 styles/ .
-. 3 .gitignore .
-. 3 README.md .
-. 3 eslint.config.js .
-. 3 index.html .
-. 3 package-lock.json .
-. 3 package.json .
-. 3 vite.config.js .
-. 2 README.md .
-}
+# solor_solution_scripter_036
+
+- [Backend/](./solor_solution_scripter_036/Backend)
+  - [configs/](./solor_solution_scripter_036/Backend/configs)
+  - [controllers/](./solor_solution_scripter_036/Backend/controllers)
+  - [middlewares/](./solor_solution_scripter_036/Backend/middlewares)
+  - [models/](./solor_solution_scripter_036/Backend/models)
+  - [node_modules/](./solor_solution_scripter_036/Backend/node_modules)
+  - [routes/](./solor_solution_scripter_036/Backend/routes)
+  - [utils/](./solor_solution_scripter_036/Backend/utils)
+  - [.env](./solor_solution_scripter_036/Backend/.env)
+  - [.gitignore](./solor_solution_scripter_036/Backend/.gitignore)
+  - [package-lock.json](./solor_solution_scripter_036/Backend/package-lock.json)
+  - [package.json](./solor_solution_scripter_036/Backend/package.json)
+  - [server.js](./solor_solution_scripter_036/Backend/server.js)
+- [frontend/](./solor_solution_scripter_036/frontend)
+  - [dist/](./solor_solution_scripter_036/frontend/dist)
+  - [node_modules/](./solor_solution_scripter_036/frontend/node_modules)
+  - [public/](./solor_solution_scripter_036/frontend/public)
+  - [src/](./solor_solution_scripter_036/frontend/src)
+  - [styles/](./solor_solution_scripter_036/frontend/styles)
+  - [.gitignore](./solor_solution_scripter_036/frontend/.gitignore)
+  - [README.md](./solor_solution_scripter_036/frontend/README.md)
+  - [eslint.config.js](./solor_solution_scripter_036/frontend/eslint.config.js)
+  - [index.html](./solor_solution_scripter_036/frontend/index.html)
+  - [package-lock.json](./solor_solution_scripter_036/frontend/package-lock.json)
+  - [package.json](./solor_solution_scripter_036/frontend/package.json)
+  - [vite.config.js](./solor_solution_scripter_036/frontend/vite.config.js)
+- [README.md](./solor_solution_scripter_036/README.md)
 
 ## Video Walkthrough of the project
 
