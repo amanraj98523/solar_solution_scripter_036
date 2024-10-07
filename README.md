@@ -15,6 +15,35 @@ Backend: https://pollingarena.netlify.app/ <br/>
 
 ## Directory Structure
 
+solor_solution_scripter_036/
+┣ Backend/
+┃ ┣ configs/
+┃ ┣ controllers/
+┃ ┣ middlewares/
+┃ ┣ models/
+┃ ┣ node_modules/
+┃ ┣ routes/
+┃ ┣ utils/
+┃ ┣ .env
+┃ ┣ .gitignore
+┃ ┣ package-lock.json
+┃ ┣ package.json
+┃ ┗ server.js
+┣ frontend/
+┃ ┣ dist/
+┃ ┣ node_modules/
+┃ ┣ public/
+┃ ┣ src/
+┃ ┣ styles/
+┃ ┣ .gitignore
+┃ ┣ README.md
+┃ ┣ eslint.config.js
+┃ ┣ index.html
+┃ ┣ package-lock.json
+┃ ┣ package.json
+┃ ┗ vite.config.js
+┗ README.md
+
 ## Video Walkthrough of the project
 
 ## Features
