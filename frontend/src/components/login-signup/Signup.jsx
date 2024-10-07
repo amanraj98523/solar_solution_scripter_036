@@ -1,49 +1,42 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import axios from "./api";
-import {
-  FormControl,
-  FormLabel,
-  Box,
-  Button,
-  Input,
-  Text,
-  VStack,
-  useToast,
-} from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from './api';
+import { FormControl, FormLabel, Box, Button, Input, Text, VStack, useToast } from '@chakra-ui/react';
 
 const RegisterForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const toast = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/register", { name, email, password });
+      const response = await axios.post('/register', { name, email, password });
       console.log(response);
+      
 
       toast({
-        title: "Registration successful!",
+        title: 'Registration successful!',
         description: "You can now log in.",
-        status: "success",
+        status: 'success',
         duration: 2000,
         isClosable: true,
       });
 
-      setName("");
-      setEmail("");
-      setPassword("");
-
+      setName('');
+      setEmail('');
+      setPassword('');
+      
       setTimeout(() => {
-        window.location.href = "/login";
+        window.location.href = '/login';
       }, 1000);
+
     } catch (err) {
       toast({
-        title: "Registration failed.",
+        title: 'Registration failed.',
         description: "Please try again.",
-        status: "error",
+        status: 'error',
         duration: 2000,
         isClosable: true,
       });
@@ -52,15 +45,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <Box
-      maxW="sm"
-      mx="auto"
-      mt="10"
-      p="6"
-      boxShadow="md"
-      borderRadius="md"
-      bg="white"
-    >
+    <Box maxW="sm" mx="auto" mt="32" p="6" boxShadow="md" borderRadius="md" bg="white">
       <Text fontSize="2xl">Register</Text>
       <form onSubmit={handleSubmit}>
         <VStack spacing={4}>
@@ -74,7 +59,7 @@ const RegisterForm = () => {
               required
             />
           </FormControl>
-
+          
           <FormControl id="email" isRequired>
             <FormLabel>Email</FormLabel>
             <Input
@@ -85,7 +70,7 @@ const RegisterForm = () => {
               required
             />
           </FormControl>
-
+         
           <FormControl id="password" isRequired>
             <FormLabel>Password</FormLabel>
             <Input
@@ -96,19 +81,12 @@ const RegisterForm = () => {
               required
             />
           </FormControl>
-
-          <Button type="submit" colorScheme="teal">
-            Register
-          </Button>
+          
+          <Button type="submit" colorScheme="teal">Register</Button>
         </VStack>
       </form>
       <br />
-      <p>
-        Already have an account?{" "}
-        <Text color={"blue"} as={Link} to="/login" size="md">
-          Login
-        </Text>
-      </p>
+      <p>Already have an account? <Text color={"blue"} as={Link} to="/login" size="md">Login</Text></p>
     </Box>
   );
 };

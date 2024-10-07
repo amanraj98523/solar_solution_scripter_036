@@ -1,8 +1,8 @@
 // PollButtons.js
-
-import { Box, Button, SimpleGrid, VStack, Heading } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { AddIcon, DragHandleIcon, CheckIcon } from "@chakra-ui/icons";
+import React from 'react';
+import { Box, Button, SimpleGrid, VStack, Heading } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { AddIcon, DragHandleIcon, CheckIcon } from '@chakra-ui/icons';
 
 const PollButton = ({ to, children, icon }) => (
   <Button
@@ -12,12 +12,12 @@ const PollButton = ({ to, children, icon }) => (
     variant="solid"
     size="lg"
     borderRadius="lg"
-    _hover={{ bg: "teal.600" }}
+    _hover={{ bg: 'teal.600' }}
     leftIcon={icon}
     w="full"
     boxShadow="md"
-    _active={{ bg: "teal.700" }}
-    _focus={{ boxShadow: "outline" }}
+    _active={{ bg: 'teal.700' }}
+    _focus={{ boxShadow: 'outline' }}
   >
     {children}
   </Button>
@@ -25,9 +25,7 @@ const PollButton = ({ to, children, icon }) => (
 
 const PollButtons = () => (
   <Box p={4} maxW="1200px" mx="auto">
-    <Heading mb={6} textAlign="center">
-      Poll Management
-    </Heading>
+    <Heading mb={6} textAlign="center">Poll Management</Heading>
     <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={6}>
       <PollButton to="/pollcreation" icon={<AddIcon />}>
         Poll Creation

@@ -1,143 +1,217 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
-  Flex,
-  HStack,
-  IconButton,
   Button,
+  HStack,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
+  Avatar,
+  AvatarBadge,
+  Flex,
+  IconButton,
+  Text,
+  Image,
   useDisclosure,
-  useColorModeValue,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { Link as ScrollLink } from "react-scroll";
+import { HamburgerIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import img from "../assets/1.png";
+import axios from "axios";
 
-const Links = ["Dashboard"];
-
-const NavLink = ({ children, onClick }) => (
-  <Box
-    as={ScrollLink}
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: "transparent",
-      color: "#3E3E3E",
-    }}
-    _focus={{
-      boxShadow: "none",
-    }}
-    to={children.toLowerCase()}
-    smooth={true}
-    duration={500}
-    style={{ cursor: "pointer" }}
-    onClick={onClick}
-    color="#3E3E3E"
-  >
-    {children}
-  </Box>
-);
-
-export const Navbar = () => {
+const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
+  const navigate = useNavigate();
+  const user = localStorage.getItem("user");
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // const onLogout = async () => {
+  //   const refreshToken = localStorage.getItem("refreshToken");
+  //   console.log("Sending refresh token:", refreshToken); // Log the refresh token for debugging
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3200/api/logout", // Ensure this URL is correct
+  //       { refreshToken: localStorage.getItem("refreshToken") }, // Send the refresh token in the request body
+  //       {
+  //         withCredentials: true, // Include cookies
+  //       }
+  //     );
+
+  //     console.log("Logout response:", response.data); // Log the response for debugging
+
+  //     // Clear tokens and authentication state
+  //     localStorage.removeItem("accessToken");
+  //     localStorage.removeItem("refreshToken");
+
+  //     setIsAuthenticated(false); // Update state to reflect logged-out status
+  //     navigate("/login"); // Redirect to login page
+  //   } catch (error) {
+  //     console.error("Error logging out:", error.response.data); // Log the error response for debugging
+  //   }
+  // };
+  const onLogout = async () => {
+    try {
+      // Retrieve refresh token from cookies
+      const refreshToken = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("refreshToken="))
+        ?.split("=")[1]; // Optional chaining to handle case where token is missing
+
+      if (!refreshToken) {
+        throw new Error("Refresh token not found in cookies");
+      }
+
+      // Send logout request with refresh token
+      const response = await axios.post(
+        "http://localhost:3200/api/logout",
+        {
+          refreshToken,
+        },
+        {
+          withCredentials: true, // Ensure cookies are sent with the request
+        }
+      );
+
+      // Clear tokens from localStorage
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+
+      setIsAuthenticated(false); // Update authentication state
+      navigate("/login"); // Redirect to the login page
+    } catch (error) {
+      console.error(
+        "Error logging out:",
+        error.response?.data || error.message
+      );
+    }
+  };
 
   return (
     <Box
-      bg="#ffffff"
-      px={4}
-      position="sticky"
-      top={0}
-      zIndex={1000}
-      as="header"
-      w="full"
+      as="nav"
+      bg="#8853bf"
+      p="4"
+      boxShadow="md"
+      position="fixed"
+      top="0"
+      left="0"
+      right="0"
+      zIndex="1000"
     >
-      <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-        <Box fontWeight="bold" color="#8853bf">
-          <img src="pa1.png" alt="logo" width={150} height={30} />
-        </Box>{" "}
-        {/* Accent color for the logo */}
-        <HStack spacing={8} alignItems={"center"}>
-          <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-            {Links.map((link) => (
-              <NavLink key={link} onClick={onClose}>
-                {link}
-              </NavLink>
-            ))}
-          </HStack>
+      <Flex justify="space-between" align="center" wrap="wrap">
+        <IconButton
+          icon={<HamburgerIcon />}
+          display={{ base: "block", md: "none" }}
+          onClick={onOpen}
+          bg="teal.500"
+          _hover={{ bg: "teal.600" }}
+          aria-label="Open Sidebar"
+        />
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          bg="wheat"
+          borderRadius="50%"
+          w="50px"
+          h="50px"
+          marginRight="auto"
+          marginLeft="auto"
+        >
+          <Image src={img} alt="see" borderRadius="full" boxSize="60px" />
+        </Box>
+        <Box color={"white"} fontWeight="bold" fontSize="26px">
+          POLLING ARENA
+        </Box>
+
+        <HStack spacing="4" flex="1" justify="center">
           <Button
-            as="a"
-            href="Dashboard"
-            target="_blank"
-            color="black"
-            bg="#f3e3ff"
-            _hover={{
-              color: "#3E3E3E",
-            }}
+            as={Link}
+            to="/home"
+            colorScheme="#f3e3ff"
+            variant="solid"
+            size="md"
+            borderRadius="md"
+            _hover={{ bg: "#3E3E3E" }}
           >
-            Dashboard
+            Home
           </Button>
           <Button
-            as="a"
-            href="login" // Replace with your resume PDF path
-            target="_blank"
-            color="black"
-            bg="#f3e3ff"
-            _hover={{
-              color: "#3E3E3E",
-            }}
+            as={Link}
+            to="/contact"
+            colorScheme="#f3e3ff"
+            variant="solid"
+            size="md"
+            borderRadius="md"
+            _hover={{ bg: "#3E3E3E" }}
           >
-            Login
+            Contact
           </Button>
-          <Button
-            as="a"
-            href="Signup"
-            target="_blank"
-            color="#0a0a0a"
-            bg="#8853bf"
-            _hover={{
-              color: "#3E3E3E",
-            }}
-          >
-            Sign Up
-          </Button>
-          <Menu isOpen={isOpen}>
-            <MenuButton
-              as={Button}
-              rounded={"full"}
-              variant={"link"}
-              cursor={"pointer"}
-              onClick={isOpen ? onClose : onOpen}
-              minW={0}
-              display={{ md: "none" }}
-            >
-              <IconButton
-                size={"md"}
-                bg={"#f3e3ff"}
-                icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                aria-label={"Open Menu"}
-                display={{ md: "none" }}
-                _hover={{
-                  bg: "#f3e3ff",
-                }}
-                _focus={{
-                  boxShadow: "none",
-                }}
-              />
-            </MenuButton>
-            <MenuList bg={"#f3e3ff"} borderColor="#f3e3ff">
-              {Links.map((link) => (
-                <MenuItem bg={"#f3e3ff"} key={link} onClick={onClose}>
-                  <NavLink onClick={onClose}>{link}</NavLink>
-                </MenuItem>
-              ))}
-            </MenuList>
-          </Menu>
         </HStack>
+
+        {isAuthenticated ? (
+          <>
+            {user === "Admin@gmail.com" && (
+              <Text
+                as={Link}
+                to="/admin"
+                color="white"
+                m="5px"
+                variant="solid"
+                size="md"
+                borderRadius="md"
+                _hover={{ bg: "teal.200" }}
+              >
+                Admin
+              </Text>
+            )}
+            <Menu>
+              <MenuButton
+                as={Button}
+                colorScheme="teal"
+                variant="outline"
+                borderRadius="md"
+                rightIcon={<ChevronDownIcon />}
+              >
+                <Avatar size="md" name="User" cursor="pointer">
+                  <AvatarBadge boxSize="1.25em" bg="green.500" />
+                </Avatar>
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={onLogout}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+          </>
+        ) : (
+          <>
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                icon={
+                  <Avatar size="md" name="User" cursor="pointer">
+                    <AvatarBadge boxSize="1.25em" bg="tomato" />
+                  </Avatar>
+                }
+                variant="outline"
+                borderColor="teal.600"
+              >
+                <ChevronDownIcon />
+              </MenuButton>
+              <MenuList>
+                <MenuItem as={Link} to="/login">
+                  Login
+                </MenuItem>
+                <MenuItem as={Link} to="/signup">
+                  Register
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </>
+        )}
       </Flex>
     </Box>
   );
 };
+
+export default Navbar;

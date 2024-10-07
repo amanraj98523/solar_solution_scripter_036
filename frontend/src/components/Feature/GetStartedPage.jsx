@@ -1,4 +1,3 @@
-"use client";
 
 import {
   Box,
@@ -12,7 +11,7 @@ import {
   createIcon,
 } from "@chakra-ui/react";
 
-export const GetStarted = () => {
+export const GetStartedPage = () => {
   return (
     <>
       <Container maxW={"3xl"}>

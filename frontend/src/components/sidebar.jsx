@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Box,
   VStack,
@@ -16,9 +18,9 @@ import {
   MenuList,
   MenuItem,
   Text,
-} from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { AddIcon, DragHandleIcon, CheckIcon } from "@chakra-ui/icons";
+} from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
+import { AddIcon, DragHandleIcon, CheckIcon } from '@chakra-ui/icons';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
@@ -39,14 +41,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           zIndex="docked"
         >
           <VStack spacing={4} align="start">
-            <Button
-              as={Link}
-              to="/polls"
-              variant="solid"
-              size="md"
-              borderRadius="md"
-              _hover={{ bg: "#f5e3fd" }}
-            >
+            <Button as={Link} to="/polls" variant="solid" size="md" borderRadius="md" _hover={{ bg: '#f3e3ff' }}>
               User Polls
             </Button>
 
@@ -56,50 +51,34 @@ const Sidebar = ({ isOpen, onClose }) => {
                 variant="solid"
                 size="md"
                 borderRadius="md"
-                _hover={{ bg: "#f5e3fd" }}
+                _hover={{ bg: '#f3e3ff' }}
                 rightIcon={<ChevronDownIcon />}
               >
                 Create Poll
               </MenuButton>
-              <MenuList bg={"#8853bf"}>
-                <MenuItem bg={"#8853bf"} as={Link} to="/showallcreations">
-                  <AddIcon mr={2} />
-                  Poll Creation
+              <MenuList bg={'#8853bf'}>
+                <MenuItem bg={'#8853bf'} as={Link} to="/showallcreations">
+                  <AddIcon mr={2} />Poll Creation
                 </MenuItem>
-                <MenuItem bg={"#8853bf"} as={Link} to="/pollcreation">
-                  <AddIcon mr={2} />
-                  MCQ Poll Creation
+                <MenuItem bg={'#8853bf'} as={Link} to="/pollcreation">
+                  <AddIcon mr={2} />MCQ Poll Creation
                 </MenuItem>
-                <MenuItem bg={"#8853bf"} as={Link} to="/polldrag">
+                <MenuItem bg={'#8853bf'} as={Link} to="/polldrag">
                   <DragHandleIcon mr={2} /> Drag Poll
                 </MenuItem>
-                <MenuItem bg={"#8853bf"} as={Link} to="/true-false-poll">
+                <MenuItem bg={'#8853bf'} as={Link} to="/true-false-poll">
                   <CheckIcon mr={2} /> Binary Poll
                 </MenuItem>
               </MenuList>
             </Menu>
 
-            <Button
-              as={Link}
-              to="/pollsresult"
-              variant="solid"
-              size="md"
-              borderRadius="md"
-              _hover={{ bg: "#f5e3fd" }}
-            >
+            <Button as={Link} to="/pollsresult" variant="solid" size="md" borderRadius="md" _hover={{ bg: '#f3e3ff' }}>
               Analytics
             </Button>
-
-            <Button
-              as={Link}
-              to="/video"
-              variant="solid"
-              size="md"
-              borderRadius="md"
-              _hover={{ bg: "#f5e3fd" }}
-            >
-              Tutorial
-            </Button>
+            
+            <Button as={Link} to='/video'  variant="solid" size="md" borderRadius="md" _hover={{ bg: '#f3e3ff' }}>
+                    Tutorial
+                  </Button>
           </VStack>
         </Box>
       ) : (
@@ -110,14 +89,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               <DrawerHeader>Sidebar</DrawerHeader>
               <DrawerBody>
                 <VStack spacing={4} align="start">
-                  <Button
-                    as={Link}
-                    to="/polls"
-                    variant="solid"
-                    size="md"
-                    borderRadius="md"
-                    _hover={{ bg: "#f5e3fd" }}
-                  >
+                  <Button as={Link} to="/polls" variant="solid" size="md" borderRadius="md" _hover={{ bg: '#f3e3ff' }}>
                     User Polls
                   </Button>
 
@@ -127,7 +99,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                       variant="solid"
                       size="md"
                       borderRadius="md"
-                      _hover={{ bg: "#f5e3fd" }}
+                      _hover={{ bg: '#f3e3ff' }}
                       rightIcon={<ChevronDownIcon />}
                     >
                       Create Poll
@@ -148,25 +120,14 @@ const Sidebar = ({ isOpen, onClose }) => {
                     </MenuList>
                   </Menu>
 
-                  <Button
-                    as={Link}
-                    to="/pollsresult"
-                    variant="solid"
-                    size="md"
-                    borderRadius="md"
-                    _hover={{ bg: "#f5e3fd" }}
-                  >
+                  <Button as={Link} to="/pollsresult" variant="solid" size="md" borderRadius="md" _hover={{ bg: '#f3e3ff' }}>
                     Analytics
                   </Button>
-
-                  <Button
-                    variant="solid"
-                    size="md"
-                    borderRadius="md"
-                    _hover={{ bg: "#f5e3fd" }}
-                  >
+                  
+                  <Button  variant="solid" size="md" borderRadius="md" _hover={{ bg: '#f3e3ff' }}>
                     Tutorial
                   </Button>
+
                 </VStack>
               </DrawerBody>
             </DrawerContent>

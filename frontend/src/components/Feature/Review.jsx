@@ -10,7 +10,7 @@ import {
   Text,
   CardBody,
 } from "@chakra-ui/react";
-import "./Review.css"
+import "./Review.css";
 export const Review = () => {
   return (
     <Box className="review-section">
@@ -122,7 +122,6 @@ export const Review = () => {
           }}
         ></CardFooter>
       </Card>
-      
     </Box>
   );
 };

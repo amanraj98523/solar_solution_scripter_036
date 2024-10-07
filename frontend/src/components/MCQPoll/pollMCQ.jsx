@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -11,16 +11,14 @@ import {
   IconButton,
   Select,
   useToast,
-} from "@chakra-ui/react";
-import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import axios from "../login-signup/api";
+} from '@chakra-ui/react';
+import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
+import axios from '../login-signup/api';
 
 const PollCreation = () => {
-  const [questions, setQuestions] = useState([
-    { question: "", options: [{ text: "" }], type: "radio" },
-  ]);
+  const [questions, setQuestions] = useState([{ question: '', options: [{ text: '' }], type: 'radio' }]);
   const [title, setTitle] = useState("");
-  const toast = useToast();
+  const toast=useToast();
 
   const handleQuestionChange = (index, event) => {
     const newQuestions = [...questions];
@@ -42,7 +40,7 @@ const PollCreation = () => {
 
   const addOption = (qIndex) => {
     const newQuestions = [...questions];
-    newQuestions[qIndex].options.push({ text: "" });
+    newQuestions[qIndex].options.push({ text: '' });
     setQuestions(newQuestions);
   };
 
@@ -53,10 +51,7 @@ const PollCreation = () => {
   };
 
   const addQuestion = () => {
-    setQuestions([
-      ...questions,
-      { question: "", options: [{ text: "" }], type: "radio" },
-    ]);
+    setQuestions([...questions, { question: '', options: [{ text: '' }], type: 'radio' }]);
   };
 
   const removeQuestion = (qIndex) => {
@@ -65,79 +60,63 @@ const PollCreation = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem('accessToken');
 
     if (!token) {
-      alert("No access token found. Please log in.");
+      alert('No access token found. Please log in.');
       return;
     }
 
     const pollData = {
       type: "MCQ",
       title: `${title}`,
-      questions: questions.map((q) => ({
+      questions: questions.map(q => ({
         question: q.question,
         type: q.type,
-        options: q.options.map((opt) => ({ text: opt.text })),
-      })),
+        options: q.options.map(opt => ({ text: opt.text }))
+      }))
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:3200/api",
-        pollData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
+      const response = await axios.post('/polls', pollData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-      );
-      console.log("Poll created successfully:", response.data);
-      alert("Poll created successfully!");
-      setQuestions([{ question: "", options: [{ text: "" }], type: "radio" }]);
+      });
+      console.log('Poll created successfully:', response.data);
+      alert('Poll created successfully!');
+      setQuestions([{ question: '', options: [{ text: '' }], type: 'radio' }]);
       setTitle("");
       toast({
-        title: "poll created",
+        title: 'poll created',
         description: "You have been successfully created in.",
-        status: "success",
+        status: 'success',
         duration: 2000,
         isClosable: true,
       });
       setTimeout(() => {
-        window.location.href = "/polls"; // Need to change
+        window.location.href = '/polls'; // Need to change
       }, 1000);
+
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
       if (error.response) {
-        alert(
-          `Failed to create poll. Server responded with status code ${error.response.status}.`
-        );
+        alert(`Failed to create poll. Server responded with status code ${error.response.status}.`);
       } else {
-        alert("Failed to create poll. Error setting up request.");
+        alert('Failed to create poll. Error setting up request.');
       }
     }
   };
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
-  };
+  }
 
   return (
-    <Box
-      w="600px"
-      mx="auto"
-      p={4}
-      borderWidth={1}
-      borderRadius="lg"
-      boxShadow="lg"
-    >
+    <Box w="600px" mx="auto" p={4} borderWidth={1} borderRadius="lg" boxShadow="lg">
       <Box mb={4}>
-        <Input
-          value={title}
-          onChange={handleTitle}
-          placeholder="Enter Your Poll Title"
-        />
+        <Input value={title} onChange={handleTitle} placeholder='Enter Your Poll Title' />
       </Box>
       <form onSubmit={handleSubmit}>
         <VStack spacing={4}>
@@ -154,10 +133,7 @@ const PollCreation = () => {
                 </FormControl>
                 <FormControl id={`type-${qIndex}`} isRequired>
                   <FormLabel>Type</FormLabel>
-                  <Select
-                    value={q.type}
-                    onChange={(e) => handleTypeChange(qIndex, e)}
-                  >
+                  <Select value={q.type} onChange={(e) => handleTypeChange(qIndex, e)}>
                     <option value="radio">Radio</option>
                     <option value="checkbox">Checkbox</option>
                   </Select>
@@ -189,12 +165,7 @@ const PollCreation = () => {
                   )}
                 </HStack>
               ))}
-              <Button
-                leftIcon={<AddIcon />}
-                onClick={() => addOption(qIndex)}
-                w="100%"
-                mt={2}
-              >
+              <Button leftIcon={<AddIcon />} onClick={() => addOption(qIndex)} w="100%" mt={2}>
                 Add Option
               </Button>
             </Box>
