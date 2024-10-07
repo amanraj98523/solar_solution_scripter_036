@@ -82,7 +82,7 @@ Installation
    Navigate to the backend directory and install the necessary dependencies:
 
 ```bash
-Copy code
+
 cd backend
 npm install
 ```
@@ -91,7 +91,7 @@ npm install
    Next, move to the frontend directory and install the necessary dependencies:
 
 ```bash
-Copy code
+
 cd ../frontend
 npm install
 ```
@@ -131,7 +131,7 @@ Running the Application
    Open a terminal window, navigate to the backend directory, and start the backend server:
 
 ```bash
-Copy code
+
 cd backend
 npm start
 ```
@@ -142,13 +142,13 @@ The backend server will be running on http://localhost:2300.
    In a new terminal window, navigate to the frontend directory and start the frontend development server:
 
 ```bash
-Copy code
+
 cd frontend
 npm run dev
 ```
 
 ```bash
-Copy code
+
 mongo
 ```
 
