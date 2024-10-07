@@ -125,7 +125,7 @@ const App = () => {
                   element={<RatingPollAttend />}
                 />
                 <Route
-                  path="/Scalepolls/:pollId/response"
+                  path="/scalepolls/:pollId/responses"
                   element={<PollResults />}
                 />
                 <Route
