@@ -1,83 +1,101 @@
 import express from "express";
 import {} from "dotenv/config";
-import http from "http";
-import { Server } from "socket.io";
 import cors from "cors";
+import loginRouter from "./routes/Login.js";
+import connectDB from "./configs/db.js";
 import bodyParser from "body-parser";
-import connetDB from "./configs/db.js";
-import MongoStore from "connect-mongo";
+import otpRouter from "./routes/otprouter.js";
+import pollRouter from "./routes/pollRouter.js";
+import scalePollRouter from "./routes/Scallingpoll.js";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import { strict } from "assert";
-import loginrouter from "./routes/Login.js";
-import pollrouter from "./routes/pollRouter.js";
-import scalepoll from "./routes/Scallingpoll.js";
+import MongoStore from "connect-mongo";
 
+import http from "http";
+import { Server } from "socket.io";
 
+// Initialize Express app
 const app = express();
 
+// Create an HTTP server
 const server = http.createServer(app);
-const io = new Server(server);
 
+// Initialize Socket.IO server with CORS configuration
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173", // Allow requests from your frontend
+    methods: ["GET", "POST"],
+    credentials: true, // Allow credentials like cookies
+  },
+});
+
+// CORS configuration for Express API
+const allowedOrigins = ["http://localhost:5173"];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true, // Allow credentials
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Socket.IO connection handler
 io.on("connection", (socket) => {
   console.log("New client connected");
 
   socket.on("disconnect", () => {
-    console.log("Client Disconnected");
+    console.log("Client disconnected");
   });
 });
 
+// Middleware to attach Socket.IO instance to request
 app.use((req, res, next) => {
   req.io = io;
   next();
 });
 
-export { io };
-
-const allowedOrigins = ["http://localhost:5173, http://localhost:3200/api"];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
-
+// Body parser middleware
 app.use(express.json());
 app.use(bodyParser.json());
-app.use("/api", loginrouter);
-app.use("/api", pollrouter);
-app.use("/api", scalepoll)
-
 app.use(cookieParser());
+
+// Session configuration
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URL }),
+    store: MongoStore.create({ mongoUrl: process.env.mongo_url }),
     cookie: {
-      secure: process.env.NODE_ENV === "development",
+      secure: process.env.NODE_ENV === "production", // Set to true if using HTTPS in production
       httpOnly: true,
-      sameSite: strict,
+      sameSite: "strict",
     },
   })
 );
 
+// API routes
+app.use("/api", pollRouter);
+app.use("/api", otpRouter);
+app.use("/api", loginRouter);
+app.use("/api", scalePollRouter);
+// app.use("/api", trueOrFalseRouter);
+
+// Default route
+app.get("/", (req, res) => {
+  res.send("this is home route");
+});
+
+// Start the server
 const PORT = process.env.PORT || 3200;
 server.listen(PORT, async () => {
   try {
-    connetDB();
-    console.log(`mongo connected`);
-    console.log(`server is running at port ${PORT}`);
+    await connectDB(); // Ensure the database connection
+    console.log("MongoDB connected");
+    console.log(`Server is running at http://localhost:${PORT}`);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 });

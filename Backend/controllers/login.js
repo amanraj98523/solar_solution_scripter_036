@@ -99,20 +99,35 @@ export const login = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
+
 export const logout = async (req, res) => {
-  const { refreshToken } = req.body;
+  const { refreshToken } = req.cookies;
+  console.log("Received refresh token:", refreshToken);
+
+  if (!refreshToken) {
+    return res.status(400).json({ message: "Refresh token is missing" });
+  }
+
   try {
-    const user = await Customer.findOne({ refreshToken });
-    if (user) {
-      user.refreshToken = null;
-      await user.save();
+    const user = await Customer.findOne({ refreshToken }); // Ensure you are using the correct model
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
+
+    // Clear the user's refresh token
+    user.refreshToken = null;
+    await user.save();
+
+    // Clear cookies
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
-    res.status(200).json({ message: "User logged out successfully" });
+
+    return res.status(200).json({ message: "User logged out successfully" });
   } catch (error) {
-    console.error(error);
-    res.status(400).json({ message: "User logout failed", error });
+    console.error("Logout error:", error);
+    return res
+      .status(400)
+      .json({ message: "User logout failed", error: error.message });
   }
 };
 
@@ -158,7 +173,33 @@ export const getCustomerById = async (req, res) => {
   }
 };
 
+// update one user
 
+// export const updateCustomer = async (req, res) => {
+//     const customer = await Customer.findById(req.params.id);
+
+//     if (customer) {
+//       customer.name = req.body.name || customer.name;
+//       customer.email = req.body.email || customer.email;
+//       customer.role = req.body.role || customer.role;
+
+//       if (req.body.password) {
+//         customer.password = req.body.password;
+//       }
+
+//       const updatedCustomer = await customer.save();
+//       res.json({
+//         _id: updatedCustomer._id,
+//         name: updatedCustomer.name,
+//         email: updatedCustomer.email,
+//         role: updatedCustomer.role,
+//       });
+//     } else {
+//       res.status(404).json({ message: 'Customer not found' });
+//     }
+//   };
+
+// Controller
 export const updateCustomer = async (req, res) => {
   console.log("Updating customer with ID:", req.params.id); // Log req.params.id to see if it's undefined
   try {
