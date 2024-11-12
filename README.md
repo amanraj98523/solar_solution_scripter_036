@@ -9,7 +9,7 @@ Masai_poll is a dynamic polling platform that allows users to create polls using
 Fullstack
 
 ## Deplolyed App
-Frontend:  <br/>
+Frontend:  `https://pollingarena.netlify.app/home`<br/>
 Backend:   <br/>
 Database:
 
